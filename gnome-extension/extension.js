@@ -8,10 +8,6 @@
 import Gio from 'gi://Gio';
 import GLib from 'gi://GLib';
 import Shell from 'gi://Shell';
-import St from 'gi://St';
-import Clutter from 'gi://Clutter';
-import * as PanelMenu from 'resource:///org/gnome/shell/ui/panelMenu.js';
-import * as Main from 'resource:///org/gnome/shell/ui/main.js';
 import { Extension } from 'resource:///org/gnome/shell/extensions/extension.js';
 
 const IFACE_XML = `
@@ -35,58 +31,10 @@ export default class CircleAIExtension extends Extension {
         this._dbusImpl = Gio.DBusExportedObject.wrapJSObject(IFACE_XML, this);
         this._dbusImpl.export(Gio.DBus.session, '/io/github/avivderi/CircleAI');
         console.log('[CircleAI] D-Bus object exported at /io/github/avivderi/CircleAI');
-
-        try {
-            // dontCreateMenu = true so clicking acts as a direct button press
-            this._indicator = new PanelMenu.Button(0.0, 'Google Lens — Circle to Search', true);
-            const iconPath = GLib.build_filenamev([this.path, 'assets', 'tray-icon.png']);
-            const gicon = Gio.icon_new_for_string(iconPath);
-            const icon = new St.Icon({
-                gicon: gicon,
-                icon_size: 20,
-                style_class: 'system-status-icon',
-                style: 'color: unset;',
-            });
-            this._indicator.add_child(icon);
-
-            const triggerCaptureSignal = () => {
-                console.log('[CircleAI] Top bar Google Lens icon clicked!');
-                try {
-                    if (this._dbusImpl) {
-                        this._dbusImpl.emit_signal('TriggerCapture', null);
-                    }
-                    Gio.DBus.session.emit_signal(
-                        null,
-                        '/io/github/avivderi/CircleAI',
-                        'io.github.avivderi.CircleAI',
-                        'TriggerCapture',
-                        null
-                    );
-                } catch (e) {
-                    console.error('[CircleAI] emit_signal failed:', e);
-                }
-            };
-
-            this._indicator.connect('event', (actor, event) => {
-                const type = event.type();
-                if (type === Clutter.EventType.BUTTON_PRESS || type === Clutter.EventType.TOUCH_BEGIN) {
-                    triggerCaptureSignal();
-                    return Clutter.EVENT_STOP;
-                }
-                return Clutter.EVENT_PROPAGATE;
-            });
-
-            Main.panel.addToStatusArea('google-lens-indicator', this._indicator);
-            console.log('[CircleAI] Top panel indicator added successfully.');
-        } catch (err) {
-            logError(err, 'CircleAI: Failed to create top panel indicator');
-        }
     }
 
     disable() {
         console.log('[CircleAI] Extension disabling…');
-        this._indicator?.destroy();
-        this._indicator = null;
         this._dbusImpl?.unexport();
         this._dbusImpl = null;
     }

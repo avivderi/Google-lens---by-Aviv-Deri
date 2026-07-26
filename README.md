@@ -53,7 +53,7 @@
 ## 📁 מבנה הפרויקט (Project Structure)
 
 ```text
-circle-ai/
+Google-lens---by-Aviv-Deri/
 ├── gnome-extension/            # הרחבת GNOME Shell המקורית
 │   ├── extension.js            # לוגיקת GJS, הזרקת Top Bar וצילום מסך C-API
 │   └── metadata.json           # הגדרות Extension עבור GNOME Shell 45–50
@@ -68,7 +68,9 @@ circle-ai/
 │       └── overlay-renderer.js # הניפוש הויזואלי (Rainbow animation, Mouse handlers)
 ├── assets/
 │   └── tray-icon.png           # אייקון Google Lens הרשמי
+├── .env.example                # קובץ דוגמה להגדרות סביבה
 ├── install-extension.sh        # סקריפט התקנה אוטומטי להרחבת GNOME
+├── package.json                # הגדרות Node.js / Electron
 └── README.md                   # קובץ תיעוד זה
 ```
 
@@ -76,7 +78,27 @@ circle-ai/
 
 ## 🔧 התקנה והרצה (Installation & Setup)
 
-### 1. התקנת הרחבת GNOME
+### 1. שכפול הפרויקט
+
+```bash
+git clone https://github.com/avivderi/Google-lens---by-Aviv-Deri.git
+cd Google-lens---by-Aviv-Deri
+```
+
+### 2. הגדרת משתני סביבה
+
+```bash
+cp .env.example .env
+nano .env   # הוסף את ANTHROPIC_API_KEY שלך
+```
+
+### 3. התקנת תלויות Node.js
+
+```bash
+npm install
+```
+
+### 4. התקנת הרחבת GNOME
 
 ```bash
 ./install-extension.sh
@@ -84,14 +106,13 @@ circle-ai/
 
 *לאחר ההתקנה הראשונית יש לבצע **Log out ו-Log in** מחדש למשתמש כדי ש-Wayland יטען את ה-Extension.*
 
-### 2. התקנת תלויות והרצת האפליקציה
+### 5. הרצת האפליקציה
 
 ```bash
-npm install
 npm start
 ```
 
-### 3. קישוריות והפעלה אוטומטית (Autostart)
+### 6. קישוריות והפעלה אוטומטית (Autostart)
 
 האפליקציה יוצרת אוטומטית קובץ אוטוסטארט בנתיב:
 `~/.config/autostart/circle-ai.desktop`

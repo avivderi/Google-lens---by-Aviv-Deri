@@ -6,12 +6,23 @@
 set -euo pipefail
 
 EXTENSION_UUID="circle-ai-capture@avivderi.github.io"
+OLD_EXTENSION_UUID="circle-ai-capture@avivderi.local"
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 SRC_DIR="$SCRIPT_DIR/gnome-extension"
 DEST_DIR="$HOME/.local/share/gnome-shell/extensions/$EXTENSION_UUID"
+OLD_DEST_DIR="$HOME/.local/share/gnome-shell/extensions/$OLD_EXTENSION_UUID"
 
 echo "=== Circle AI — GNOME Extension Installer ==="
 echo ""
+
+# Remove old extension if exists
+if command -v gnome-extensions &>/dev/null; then
+    gnome-extensions disable "$OLD_EXTENSION_UUID" 2>/dev/null || true
+fi
+if [ -d "$OLD_DEST_DIR" ]; then
+    echo "Removing old extension: $OLD_DEST_DIR"
+    rm -rf "$OLD_DEST_DIR"
+fi
 
 # Verify GNOME Shell version
 GNOME_VER=$(gnome-shell --version | grep -oP '\d+\.\d+' | head -1)

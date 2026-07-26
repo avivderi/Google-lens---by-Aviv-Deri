@@ -2,7 +2,7 @@
   "name": "circle-ai",
   "version": "1.0.0",
   "author": "Aviv Deri <avivderi@github.com>",
-  "homepage": "https://github.com/avivderi/circle-ai",
+  "homepage": "https://github.com/avivderi/Google-lens---by-Aviv-Deri",
   "description": "Circle to Search — AI-powered screen selection tool for Linux",
   "main": "src/main.js",
   "scripts": {
