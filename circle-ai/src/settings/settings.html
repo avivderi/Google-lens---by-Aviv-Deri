@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Circle AI — הגדרות</title>
+  <link rel="stylesheet" href="settings.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Header -->
+    <header class="header">
+      <div class="brand">
+        <img src="../../assets/tray-icon.png" alt="Circle AI Icon" class="logo">
+        <div>
+          <h1>Circle AI</h1>
+          <p class="subtitle">Circle to Search & Google Lens ללינוקס</p>
+        </div>
+      </div>
+      <span class="version-badge" id="versionBadge">v1.0.0</span>
+    </header>
+
+    <!-- Main Content -->
+    <main class="content">
+      <!-- General Settings Card -->
+      <section class="card">
+        <h2 class="card-title">
+          <span class="icon">⚙️</span> הגדרות כלליות וקיצורים
+        </h2>
+        
+        <div class="form-group">
+          <label for="shortcutInput">מקש קיצור ללכידה (Hotkey):</label>
+          <div class="input-with-hint">
+            <input type="text" id="shortcutInput" placeholder="Super+Space" dir="ltr">
+            <small class="hint">דוגמאות: Super+Space, Control+Shift+S, Alt+Z</small>
+          </div>
+        </div>
+
+        <div class="form-group row-group">
+          <div class="toggle-container">
+            <label class="switch">
+              <input type="checkbox" id="autostartToggle">
+              <span class="slider round"></span>
+            </label>
+            <div class="toggle-text">
+              <span class="toggle-label">הפעלה אוטומטית עם המחשב</span>
+              <small class="hint">מפעיל את Circle AI ברקע בעת התחברות למערכת</small>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- API Keys Card -->
+      <section class="card">
+        <h2 class="card-title">
+          <span class="icon">🔑</span> מפתחות API (AI Services)
+        </h2>
+
+        <div class="form-group">
+          <label for="geminiApiKey">Gemini API Key:</label>
+          <div class="password-input-wrapper">
+            <input type="password" id="geminiApiKey" placeholder="AIzaSy..." dir="ltr">
+            <button type="button" class="toggle-vis-btn" data-target="geminiApiKey" title="הצג/הסתר">👁️</button>
+          </div>
+          <small class="hint">נדרש עבור ניתוח תמונות מתקדם וסריקת טקסט עם Google Gemini</small>
+        </div>
+
+        <div class="form-group">
+          <label for="anthropicApiKey">Anthropic API Key (Claude):</label>
+          <div class="password-input-wrapper">
+            <input type="password" id="anthropicApiKey" placeholder="sk-ant-api..." dir="ltr">
+            <button type="button" class="toggle-vis-btn" data-target="anthropicApiKey" title="הצג/הסתר">👁️</button>
+          </div>
+          <small class="hint">רשות — לשימוש במודלי Claude AI</small>
+        </div>
+      </section>
+
+      <!-- Panel & Behavior Card -->
+      <section class="card">
+        <h2 class="card-title">
+          <span class="icon">📐</span> חלונית תוצאות
+        </h2>
+
+        <div class="grid-2">
+          <div class="form-group">
+            <label for="panelWidth">רוחב חלונית (פיקסלים):</label>
+            <input type="number" id="panelWidth" min="400" max="1920" placeholder="1150" dir="ltr">
+          </div>
+          <div class="form-group">
+            <label for="panelHeight">גובה חלונית (פיקסלים):</label>
+            <input type="number" id="panelHeight" min="300" max="1080" placeholder="760" dir="ltr">
+          </div>
+        </div>
+      </section>
+
+      <!-- GNOME Extension Card -->
+      <section class="card">
+        <h2 class="card-title">
+          <span class="icon">🧩</span> הרחבת GNOME Shell
+        </h2>
+        <div class="extension-status-box">
+          <div class="status-indicator">
+            <span class="status-dot" id="extStatusDot"></span>
+            <span class="status-text" id="extStatusText">בודק סטטוס הרחבה...</span>
+          </div>
+          <button type="button" class="btn btn-secondary" id="installExtBtn">
+            ⚙️ התקן / עדכן הרחבה ב-GNOME
+          </button>
+        </div>
+        <small class="hint">ההרחבה מאפשרת ללכוד מסך בצורה מושלמת בסביבת Wayland ומוסיפה אייקון בסרגל העליון.</small>
+      </section>
+    </main>
+
+    <!-- Footer Actions -->
+    <footer class="footer">
+      <div id="toastMessage" class="toast hidden"></div>
+      <div class="footer-buttons">
+        <button type="button" class="btn btn-primary" id="saveBtn">שמור הגדרות</button>
+        <button type="button" class="btn btn-ghost" id="cancelBtn">ביטול</button>
+      </div>
+    </footer>
+  </div>
+
+  <script src="settings.js"></script>
+</body>
+</html>

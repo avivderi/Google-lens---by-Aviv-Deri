@@ -1,0 +1,16 @@
+{
+  "uuid": "circle-ai-capture@avivderi.github.io",
+  "name": "Circle AI — Circle to Search",
+  "description": "Google Lens Circle to Search for Linux / GNOME Shell Wayland & X11",
+  "url": "https://github.com/avivderi/circle-ai",
+  "shell-version": [
+    "42",
+    "43",
+    "44",
+    "45",
+    "46",
+    "47",
+    "48"
+  ],
+  "version": 3
+}

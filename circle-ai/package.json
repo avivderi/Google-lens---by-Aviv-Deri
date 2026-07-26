@@ -1,0 +1,61 @@
+{
+  "name": "circle-ai",
+  "version": "1.0.0",
+  "author": "Aviv Deri <avivderi@github.com>",
+  "homepage": "https://github.com/avivderi/circle-ai",
+  "description": "Circle to Search — AI-powered screen selection tool for Linux",
+  "main": "src/main.js",
+  "scripts": {
+    "start": "electron --no-sandbox .",
+    "dev": "ELECTRON_ENABLE_LOGGING=1 electron --no-sandbox .",
+    "login": "node src/login.js",
+    "dist": "electron-builder --linux deb AppImage",
+    "pack": "electron-builder --dir",
+    "pack:extension": "bash package-extension.sh"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.56.0",
+    "dotenv": "^16.4.7",
+    "electron-store": "^10.0.1",
+    "puppeteer-core": "^25.3.0",
+    "puppeteer-extra": "^3.3.6",
+    "puppeteer-extra-plugin-stealth": "^2.11.2",
+    "sharp": "^0.34.2",
+    "tesseract.js": "^7.0.0"
+  },
+  "devDependencies": {
+    "electron": "^36.4.0",
+    "electron-builder": "^25.1.8"
+  },
+  "build": {
+    "appId": "io.github.avivderi.circleai",
+    "productName": "Circle AI",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "src/**/*",
+      "assets/**/*",
+      "gnome-extension/**/*",
+      "package.json"
+    ],
+    "linux": {
+      "target": [
+        "deb",
+        "AppImage"
+      ],
+      "category": "Utility",
+      "icon": "assets/tray-icon.png",
+      "synopsis": "Google Lens Circle to Search for Linux",
+      "desktop": {
+        "StartupWMClass": "circle-ai"
+      }
+    },
+    "deb": {
+      "depends": [
+        "wmctrl",
+        "xclip"
+      ]
+    }
+  }
+}
