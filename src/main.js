@@ -173,7 +173,7 @@ app.on('will-quit', () => {
 function createTray() {
     const iconPath = path.join(__dirname, '..', 'assets', 'tray-icon.png');
     const icon = fs.existsSync(iconPath)
-        ? nativeImage.createFromPath(iconPath).resize({ width: 22, height: 22 })
+        ? nativeImage.createFromPath(iconPath)
         : nativeImage.createEmpty();
 
     tray = new Tray(icon);
